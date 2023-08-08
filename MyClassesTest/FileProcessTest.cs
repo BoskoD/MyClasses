@@ -51,8 +51,8 @@ namespace MyClassesTest
                 fromCall = fp.FileExists(fileName);
 
                 // Assert: Fail as we should not get here
-                Assert.Fail(@"The call to FileExists()
-                              did NOT throw ArgumentNullException as it should.");
+                Assert.Fail("The call to FileExists() did NOT throw ArgumentNullException as it should.");
+                              
             }
             catch (ArgumentException)
             {
@@ -62,9 +62,19 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void FileNameNullOrEmpty_UsingExpectedExceptionAttribute()
         {
-            Assert.Inconclusive();
+            // Arrange
+            FileProcess fp = new();
+            string fileName = string.Empty;
+            bool fromCall;
+
+            // Act
+            fromCall = fp.FileExists(fileName);
+
+            // Assert
+            Assert.Fail("The call to FileExists() did NOT throw ArgumentNullException as it should.");
         }
     }
 }
