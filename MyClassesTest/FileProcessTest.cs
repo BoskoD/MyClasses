@@ -10,7 +10,7 @@ namespace MyClassesTest
         {
             // Arrange
             FileProcess fp = new();
-            string fileName = @"C:\Windows\WindowsUpdate.log";
+            string fileName = TestConstants.GOOD_FILE_NAME;
             bool fromCall;
 
             // Act 
@@ -25,7 +25,7 @@ namespace MyClassesTest
         {
             // Arrange
             FileProcess fp = new();
-            string fileName = @"<nonExistingFile>";
+            string fileName = TestConstants.BAD_FILE_NAME;
             bool fromCall;
 
             // Act
@@ -51,7 +51,7 @@ namespace MyClassesTest
                 fromCall = fp.FileExists(fileName);
 
                 // Assert: Fail as we should not get here
-                Assert.Fail("The call to FileExists() did NOT throw ArgumentNullException as it should.");
+                Assert.Fail(TestConstants.EMPTY_FILE_MESSAGE);
                               
             }
             catch (ArgumentException)
@@ -74,7 +74,7 @@ namespace MyClassesTest
             fromCall = fp.FileExists(fileName);
 
             // Assert
-            Assert.Fail("The call to FileExists() did NOT throw ArgumentNullException as it should.");
+            Assert.Fail(TestConstants.EMPTY_FILE_MESSAGE);
         }
     }
 }
