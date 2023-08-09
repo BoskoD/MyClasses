@@ -3,10 +3,8 @@ using MyClasses;
 namespace MyClassesTest
 {
     [TestClass]
-    public class FileProcessTest
+    public class FileProcessTest : TestBase
     {
-        public TestContext? TestContext { get; set; }
-
         [TestMethod]
         public void FileNameDoesExist()
         {
