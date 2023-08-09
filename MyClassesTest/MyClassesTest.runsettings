@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RunSettings>
+
+	<!--Configurations that affect the Test Framework-->
+	<RunConfiguration>
+		<!-- Use 0 for maximum process-level parallelization. 
+		This does not force parallelization within the test DLL (on the thread-level). 
+		You can also change it from the Test menu; choose "Run tests in parallel". 
+		Unchecked = 1 (only 1), checked = 0 (max). -->
+		<MaxCpuCount>1</MaxCpuCount>
+		<!-- Path relative to directory that contains .runsettings file-->
+		<ResultsDirectory>.\TestResults</ResultsDirectory>
+	</RunConfiguration>
+	
 	<!--Parameters for tests at runtime -->
 	<TestRunParameters>
 		<Parameter name="GoodFileName" value="[AppDataPath]\TestFile.txt" />
@@ -7,5 +19,26 @@
 		<Parameter name="EmptyFileFailMessage" value="The call to FileExists() did NOT throw ArgumentNullException as it should" />
 		<Parameter name="EmptyFileMessage" value="Checking for an empty file name" />
 	</TestRunParameters>
+	
+	<!-- Configure log settings -->
+	<LoggerRunSettings>
+		<Loggers>
+			<Logger friendlyName="console" enabled="True">
+				<Configuration>
+					<Verbosity>quiet</Verbosity>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="trx" enabled="True">
+				<Configuration>
+					<LogFileName>MyClasses.trx</LogFileName>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="html" enabled="True">
+				<Configuration>
+					<LogFileName>MyClasses.html</LogFileName>
+				</Configuration>
+			</Logger>
+		</Loggers>
+	</LoggerRunSettings>
 </RunSettings>
 <!--https://learn.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022-->
