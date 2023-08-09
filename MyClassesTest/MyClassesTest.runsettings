@@ -2,9 +2,10 @@
 <RunSettings>
 	<!--Parameters for tests at runtime -->
 	<TestRunParameters>
-		<Paramater name="GoodFileName" value="C:\Windows\WindowsUpdate.log"/>
-		<Paramater name="BadFileName" value="C:\NotExist.txt"/>
-		<Paramater name="EmptyFileFailMessage" value="The call to FileExists() did NOT throw ArgumentNullException as it should"/>
-		<Paramater name="EmptyFileMessage" value="Checking for an empty file name"/>
+		<Parameter name="GoodFileName" value="C:\Windows\WindowsUpdate.log" />
+		<Parameter name="BadFileName" value="C:\NotExist.txt" />
+		<Parameter name="EmptyFileFailMessage" value="The call to FileExists() did NOT throw ArgumentNullException as it should" />
+		<Parameter name="EmptyFileMessage" value="Checking for an empty file name" />
 	</TestRunParameters>
 </RunSettings>
+<!--https://learn.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022-->
