@@ -5,6 +5,8 @@ namespace MyClassesTest
     [TestClass]
     public class FileProcessTest
     {
+        public TestContext? TestContext { get; set; }
+
         [TestMethod]
         public void FileNameDoesExist()
         {
@@ -13,8 +15,10 @@ namespace MyClassesTest
             string fileName = TestConstants.GOOD_FILE_NAME;
             bool fromCall;
 
+            TestContext?.WriteLine($"Checking for file {TestConstants.GOOD_FILE_NAME}");
+
             // Act 
-            fromCall = fp.FileExists(fileName);
+            fromCall = FileProcess.FileExists(fileName);
 
             // Assert
             Assert.IsTrue(fromCall);
@@ -28,8 +32,10 @@ namespace MyClassesTest
             string fileName = TestConstants.BAD_FILE_NAME;
             bool fromCall;
 
+            TestContext?.WriteLine($"Checking for file {TestConstants.BAD_FILE_NAME}");
+
             // Act
-            fromCall = fp.FileExists(fileName);
+            fromCall = FileProcess.FileExists(fileName);
 
             // Assert
             Assert.IsFalse(fromCall);
@@ -43,15 +49,17 @@ namespace MyClassesTest
             string fileName = string.Empty;
             bool fromCall = false;
 
+            TestContext?.WriteLine(TestConstants.EMPTY_FILE_MESSAGE);
+
             try
             {
                 // Act
                 fp = new();
 
-                fromCall = fp.FileExists(fileName);
+                fromCall = FileProcess.FileExists(fileName);
 
                 // Assert: Fail as we should not get here
-                Assert.Fail(TestConstants.EMPTY_FILE_MESSAGE);
+                Assert.Fail(TestConstants.EMPTY_FILE_FAIL_MESSAGE);
                               
             }
             catch (ArgumentException)
@@ -68,10 +76,10 @@ namespace MyClassesTest
             // Arrange
             FileProcess fp = new();
             string fileName = string.Empty;
-            bool fromCall;
+            TestContext?.WriteLine(TestConstants.EMPTY_FILE_MESSAGE);
 
             // Act
-            fromCall = fp.FileExists(fileName);
+            _ = FileProcess.FileExists(fileName);
 
             // Assert
             Assert.Fail(TestConstants.EMPTY_FILE_MESSAGE);
