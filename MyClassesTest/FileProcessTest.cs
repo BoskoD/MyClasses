@@ -38,9 +38,8 @@ namespace MyClassesTest
             bool fromCall;
             string fileName = GetTestSetting<string>("BadFileName", TestConstants.BAD_FILE_NAME);
 
-            string outputMessage;
-            outputMessage = $"Checking for file {GetTestSetting<string>("BadFileName", TestConstants.BAD_FILE_NAME)}";
-            TestContext?.WriteLine(outputMessage);
+            OutputMessage = $"Checking for file {GetTestSetting<string>("BadFileName", TestConstants.BAD_FILE_NAME)}";
+            TestContext?.WriteLine(OutputMessage);
 
             // Act
             fromCall = FileProcess.FileExists(fileName);
@@ -55,11 +54,9 @@ namespace MyClassesTest
             // Arrange
             bool fromCall = false;
             string fileName = string.Empty;
-            string outputMessage;
-            string emptyFileFailureMessage;
 
-            outputMessage = GetTestSetting<string>("EmptyFileMessage", TestConstants.EMPTY_FILE_MESSAGE);
-            TestContext?.WriteLine(outputMessage);
+            OutputMessage = GetTestSetting<string>("EmptyFileMessage", TestConstants.EMPTY_FILE_MESSAGE);
+            TestContext?.WriteLine(OutputMessage);
 
             try
             {
@@ -67,7 +64,7 @@ namespace MyClassesTest
                 fromCall = FileProcess.FileExists(fileName);
 
                 // Assert: Fail as we should not get here
-                emptyFileFailureMessage = GetTestSetting<string>("EmptyFileFailMessage", TestConstants.EMPTY_FILE_FAIL_MESSAGE);
+                string emptyFileFailureMessage = GetTestSetting<string>("EmptyFileFailMessage", TestConstants.EMPTY_FILE_FAIL_MESSAGE);
                 Assert.Fail(emptyFileFailureMessage);
                               
             }
@@ -84,15 +81,14 @@ namespace MyClassesTest
         {
             // Arrange
             string fileName = string.Empty;
-            string outputMessage;
-            outputMessage = GetTestSetting<string>("EmptyFileMessage", TestConstants.EMPTY_FILE_MESSAGE);
-            TestContext?.WriteLine(outputMessage);
+            OutputMessage = GetTestSetting<string>("EmptyFileMessage", TestConstants.EMPTY_FILE_MESSAGE);
+            TestContext?.WriteLine(OutputMessage);
 
             // Act
             _ = FileProcess.FileExists(fileName);
 
             // Assert
-            Assert.Fail(outputMessage);
+            Assert.Fail(OutputMessage);
         }
     }
 }

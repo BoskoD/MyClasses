@@ -3,6 +3,7 @@
     public class TestBase
     {
         public TestContext? TestContext { get; set; }
+        public string OutputMessage { get; set; } = string.Empty;
 
         protected T GetTestSetting<T>(string name, T defaultValue)
         {
