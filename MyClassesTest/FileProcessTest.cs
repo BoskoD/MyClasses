@@ -11,17 +11,23 @@ namespace MyClassesTest
         public void FileNameDoesExist()
         {
             // Arrange
-            FileProcess fp = new();
-            string fileName = TestContext?.Properties?["GoodFileName"]?.ToString() ?? TestConstants.GOOD_FILE_NAME;
             bool fromCall;
-            string outputMessage;
 
-            // Try to get value from runsettings if not there take it from constants
-            outputMessage = $"Checking for file {TestContext?.Properties?["GoodFileName"]?.ToString() ?? TestConstants.GOOD_FILE_NAME}";
-            TestContext?.WriteLine(outputMessage);
+            string fileName = TestContext?.Properties?["GoodFileName"]?.ToString() ?? TestConstants.GOOD_FILE_NAME;
+            fileName = fileName.Replace("[AppDataPath]",
+                Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData));
+
+            TestContext?.Write($"Checking for file: {fileName}");
+
+            // Create good file
+            File.AppendAllText(fileName, "Some Text");
 
             // Act 
             fromCall = FileProcess.FileExists(fileName);
+
+            // Delete the good file if it exists
+            if (File.Exists(fileName)) { File.Delete(fileName); }
 
             // Assert
             Assert.IsTrue(fromCall);

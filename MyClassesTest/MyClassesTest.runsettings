@@ -2,7 +2,7 @@
 <RunSettings>
 	<!--Parameters for tests at runtime -->
 	<TestRunParameters>
-		<Parameter name="GoodFileName" value="C:\Windows\WindowsUpdate.log" />
+		<Parameter name="GoodFileName" value="[AppDataPath]\TestFile.txt" />
 		<Parameter name="BadFileName" value="C:\NotExist.txt" />
 		<Parameter name="EmptyFileFailMessage" value="The call to FileExists() did NOT throw ArgumentNullException as it should" />
 		<Parameter name="EmptyFileMessage" value="Checking for an empty file name" />
