@@ -63,5 +63,14 @@ namespace MyClassesTest
                 TestContext?.WriteLine($"Test purpose: {attr.Description}");
             }
         }
+
+        protected void WriteOwner(Type type)
+        {
+            OwnerAttribute? attr = GetAttribute<OwnerAttribute>(type);
+            if (attr != null)
+            {
+                TestContext?.WriteLine($"Test owner: {attr.Owner}");
+            }
+        }
     }
 }
