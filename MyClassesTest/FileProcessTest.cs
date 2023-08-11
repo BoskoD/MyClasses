@@ -5,27 +5,67 @@ namespace MyClassesTest
     [TestClass]
     public class FileProcessTest : TestBase
     {
+        #region Class Initialize and Cleanup
+        [ClassInitialize()]
+        public static void ClassInit(TestContext context)
+        {
+            // This is called once before any tests in this class are run
+            // Put any initialization code here
+            context.WriteLine("In MyClassesTest.FileProcessTest.ClassInit()");
+        }
+
+        [ClassCleanup()]
+        public static void ClassCleanup()
+        {
+            // This is called once after all tests in this class are run
+            // Put any cleanup code here. TestContext is not available here.
+        }
+        #endregion
+
+        #region Test Initialize and Cleanup
+
+        [TestInitialize()]
+        public void TestInit()
+        {
+            TestContext?.WriteLine("In MyClassesTest.FileProcessTest.TestInit()");
+
+            if (GetTestName() == "FileNameDoesExist") { 
+                string fileName = GetFileName("GoodFileName", TestConstants.GOOD_FILE_NAME);
+
+                File.AppendAllText(fileName, "Some Text");
+            }
+        }
+
+        [TestCleanup()]
+        public void TestCleanup()
+        {
+            TestContext?.WriteLine("In MyClassesTest.FileProcessTest.TestCleanup()");
+
+            if (GetTestName() == "FileNameDoesExist")
+            {
+                string fileName = GetFileName("GoodFileName", TestConstants.GOOD_FILE_NAME);
+
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+            }
+        }
+
+        #endregion
+
         [TestMethod]
         public void FileNameDoesExist()
         {
             // Arrange
             bool fromCall;
 
-            string fileName = GetTestSetting<string>("GoodFileName", TestConstants.GOOD_FILE_NAME);
-            fileName = fileName.Replace("[AppDataPath]",
-                Environment.GetFolderPath(
-                    Environment.SpecialFolder.ApplicationData));
+            string fileName = GetFileName("GoodFileName", TestConstants.GOOD_FILE_NAME);
 
             TestContext?.Write($"Checking for file: {fileName}");
 
-            // Create good file
-            File.AppendAllText(fileName, "Some Text");
-
             // Act 
             fromCall = FileProcess.FileExists(fileName);
-
-            // Delete the good file if it exists
-            if (File.Exists(fileName)) { File.Delete(fileName); }
 
             // Assert
             Assert.IsTrue(fromCall);

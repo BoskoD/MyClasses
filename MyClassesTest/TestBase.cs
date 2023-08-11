@@ -22,5 +22,19 @@
             }
             return ret;
         }
+
+        protected string GetTestName()
+        {
+            return TestContext?.TestName ?? string.Empty;
+        }
+
+        protected string GetFileName(string name, string defaultValue)
+        { 
+            string fileName = GetTestSetting<string>(name, defaultValue);
+            fileName = fileName.Replace("[AppDataPath]",
+                Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData));
+            return fileName;
+        }
     }
 }
