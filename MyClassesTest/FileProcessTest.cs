@@ -29,6 +29,8 @@ namespace MyClassesTest
         {
             TestContext?.WriteLine("In MyClassesTest.FileProcessTest.TestInit()");
 
+            WriteDescription(this.GetType());
+
             if (GetTestName() == "FileNameDoesExist") { 
                 string fileName = GetFileName("GoodFileName", TestConstants.GOOD_FILE_NAME);
 
@@ -55,6 +57,8 @@ namespace MyClassesTest
         #endregion
 
         [TestMethod]
+        [Description("Copilot tracking candidate")]
+        [Owner("Copilot integrated")]
         public void FileNameDoesExist()
         {
             // Arrange
@@ -72,6 +76,8 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Description("Copilot tracking candidate")]
+        [Owner("Copilot integrated")]
         public void FileNameDoesNotExist()
         {
             // Arrange
@@ -89,6 +95,8 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Description("Check for a thrown ArgumentNullException using Try..Catch")]
+        [Owner("BoskoD")]
         public void FileNameNullOrEmpty_UsingTryCatch_ShouldThrowArgumentNullException()
         {
             // Arrange
@@ -117,6 +125,7 @@ namespace MyClassesTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
+        [Owner("BoskoD")]
         public void FileNameNullOrEmpty_UsingExpectedExceptionAttribute()
         {
             // Arrange

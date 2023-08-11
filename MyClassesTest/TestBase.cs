@@ -1,4 +1,6 @@
-﻿namespace MyClassesTest
+﻿using System.Collections.Generic;
+
+namespace MyClassesTest
 {
     public class TestBase
     {
@@ -35,6 +37,31 @@
                 Environment.GetFolderPath(
                     Environment.SpecialFolder.ApplicationData));
             return fileName;
+        }
+
+        protected T? GetAttribute<T>(Type type)
+        {
+            string testName = GetTestName();
+
+            var assemblyElement = type?.GetMethod(testName);
+            var attr = Attribute.GetCustomAttribute(assemblyElement, typeof(T));
+            if (attr != null)
+            {
+                //Cast the attribute to a <TAttr> type
+                return (T)Convert.ChangeType(attr, typeof(T));
+            }
+            else {
+                return default;
+            } 
+        }
+
+        protected void WriteDescription(Type type)
+        { 
+            DescriptionAttribute? attr = GetAttribute<DescriptionAttribute>(type);
+            if (attr != null)
+            {
+                TestContext?.WriteLine($"Test purpose: {attr.Description}");
+            }
         }
     }
 }
