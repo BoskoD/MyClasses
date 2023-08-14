@@ -66,6 +66,30 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [DeploymentItem("FileDataRow.txt")]
+        [DeploymentItem("FileDataRow2.txt")]
+        [DataRow("FileDataRow.txt")]
+        [DataRow("FileDataRow2.txt")]
+        [Description("Check to see if a file exists using [DataRow] attribute")]
+        [Owner("Copilot integrated")]
+        [Priority(1)]
+        [TestCategory("NoException")]
+        public void FileNameDoesExistUsingDataRow(string fileName)
+        {
+            // Arrange
+            bool fromCall;
+
+            TestContext?.Write($"Checking for the file: {fileName} " +
+                $"in folder '{TestContext?.DeploymentDirectory}'");
+
+            // Act 
+            fromCall = FileProcess.FileExists(fileName);
+
+            // Assert
+            Assert.IsTrue(fromCall);
+        }
+
+        [TestMethod]
         [DeploymentItem("FileToDeploy.txt")]
         [Description("Check to see if a file exists using [DeploymentItem] attribute")]
         [Owner("Copilot integrated")]
