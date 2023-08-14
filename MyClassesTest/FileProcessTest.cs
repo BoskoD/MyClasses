@@ -66,6 +66,29 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [DeploymentItem("FileToDeploy.txt")]
+        [Description("Check to see if a file exists using [DeploymentItem] attribute")]
+        [Owner("Copilot integrated")]
+        [Priority(1)]
+        [TestCategory("NoException")]
+        public void FileNameDoesNotExistUsingDeploymentItem()
+        {
+            // Arrange
+            bool fromCall;
+
+            string fileName = "FileToDeploy.txt";
+
+            TestContext?.Write($"Checking for the file: {fileName} " +
+                $"in folder '{TestContext?.DeploymentDirectory}'");
+
+            // Act 
+            fromCall = FileProcess.FileExists(fileName);
+
+            // Assert
+            Assert.IsTrue(fromCall);
+        }
+
+        [TestMethod]
         [Description("Copilot tracking candidate")]
         [Owner("Copilot integrated")]
         [Priority(1)]

@@ -18,4 +18,10 @@
   <ItemGroup>
     <ProjectReference Include="..\MyClasses\MyClasses.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="FileToDeploy.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
