@@ -65,6 +65,10 @@ namespace MyClassesTest
             System.Threading.Thread.Sleep(4000);
         }
 
+        /// <summary>
+        /// Using DynamicData 
+        /// </summary>
+        /// <param name="fileName">Loaded from TestData.FileNames()</param>
         [TestMethod]
         [DeploymentItem("FileDynamic.txt")]
         [DeploymentItem("FileDynamic2.txt")]
@@ -88,6 +92,10 @@ namespace MyClassesTest
             Assert.IsTrue(fromCall);
         }
 
+        /// <summary>
+        /// Using DataRow
+        /// </summary>
+        /// <param name="fileName">Loaded as a parameter read from DataRow attribute</param>
         [TestMethod]
         [DeploymentItem("FileDataRow.txt")]
         [DeploymentItem("FileDataRow2.txt")]
@@ -112,6 +120,9 @@ namespace MyClassesTest
             Assert.IsTrue(fromCall);
         }
 
+        /// <summary>
+        /// Loaded from DeploymentItem
+        /// </summary>
         [TestMethod]
         [DeploymentItem("FileToDeploy.txt")]
         [Description("Check to see if a file exists using [DeploymentItem] attribute")]
