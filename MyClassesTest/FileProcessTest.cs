@@ -66,6 +66,29 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [DeploymentItem("FileDynamic.txt")]
+        [DeploymentItem("FileDynamic2.txt")]
+        [DynamicData("FileNames", typeof(TestData), DynamicDataSourceType.Method)]
+        [Description("Check to see if a file exists using [DynamicData] attribute")]
+        [Owner("Copilot integrated")]
+        [Priority(1)]
+        [TestCategory("NoException")]
+        public void FileNameDoesExistUsingDynamicData(string fileName)
+        {
+            // Arrange
+            bool fromCall;
+
+            TestContext?.Write($"Checking for the file: {fileName} " +
+                $"in folder '{TestContext?.DeploymentDirectory}'");
+
+            // Act 
+            fromCall = FileProcess.FileExists(fileName);
+
+            // Assert
+            Assert.IsTrue(fromCall);
+        }
+
+        [TestMethod]
         [DeploymentItem("FileDataRow.txt")]
         [DeploymentItem("FileDataRow2.txt")]
         [DataRow("FileDataRow.txt")]
