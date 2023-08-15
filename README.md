@@ -48,3 +48,21 @@ In NUnit and MSTest, you can use attributes like [TestCase] and [DataRow] to sup
 **Automating Unit tests with the command line:**
 Many testing frameworks allow you to automate running tests from the command line, which is useful for integration into build and deployment processes. 
 For example, in NUnit, you can use the nunit3-console.exe tool to run tests. In MSTest, you can use the **_vstest.console.exe tool_**.
+
+**Commands**
+
+// Run all tests
+- dotnet test MyClassesTest.csproj 
+
+// Run filtered tests
+- dotnet test MyClassesTest.csproj --filter "ClassName=MyClassesTest.AssertEqualityTest"
+- dotnet test MyClassesTest.csproj --filter "Name=FileNameDoesExist"
+- dotnet test MyClassesTest.csproj --filter "TestCategory=Exception"
+- dotnet test MyClassesTest.csproj --filter "Priority=3"
+cd MyClassesTest --filter "Name=FileNameDoesExist"
+
+// Run group of tests
+- dotnet test MyClassesTest.csproj --filter "(Name=FileNameDoesExist) | (Name=AreNumbersEqualTest)"
+
+// Run all tests starting with ~
+- dotnet test MyClassesTest.csproj --filter “Name~File”
